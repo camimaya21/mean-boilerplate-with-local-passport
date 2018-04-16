@@ -10,7 +10,7 @@ mongoose.Promise = global.Promise;
 //if you're running a local DB without environment variables
 const DBURL = 'mongodb://localhost:27017/mean-app';
 
-  mongoose.connect(DBURL, {useMongoClient:true})
+  mongoose.connect(DBURL)
   .then(() =>{
     debug(`connected to database ${DBURL}`)
   }).catch((err) => {

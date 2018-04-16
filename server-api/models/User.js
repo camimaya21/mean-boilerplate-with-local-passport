@@ -5,15 +5,14 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const UserSchema = new Schema(
   {
     username: String,
-    password: String
+    password: String,
+    name: String
   },
   {
-    timestamps: {
-      createdAt: 'created_at',
-      updatedAt: 'updated_at'
-    }
+    timestamps: true
   }
 );
 
 UserSchema.plugin(passportLocalMongoose);
+
 module.exports = mongoose.model('User', UserSchema);
