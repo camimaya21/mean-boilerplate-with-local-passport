@@ -1,1 +1,2 @@
-<h1>Welcome to {{title}}!</h1>
+<h1 *ngIf="!user">Welcome to Mean Boilerplate</h1>
+<h1 *ngIf="user">Welcome {{user.username}}!</h1>

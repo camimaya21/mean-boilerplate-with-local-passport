@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signupform',
@@ -9,22 +10,26 @@ import { AuthService } from '../services/auth.service';
 export class SignupformComponent implements OnInit {
   formInfo = {
     username: '',
-    password: ''
+    name: '',
+    password: '',
+    email: ''
   };
-  constructor(public auth: AuthService) {}
+  constructor(public router: Router, private auth: AuthService) {}
 
   ngOnInit() {}
 
   signup() {
-    const { username, password } = this.formInfo;
+    const { username, name, email, password} = this.formInfo;
     if (username !== '' && password !== '') {
-      console.log(`Signup with ${username} ${password}`);
       this.auth
-        .signup(username, password)
-        .map(user => console.log(user))
-        .subscribe();
+        .signup(username, name, email, password)
+        .subscribe(
+          (user) => {
+            this.router.navigate(['/user']);
+          }
+        );
     } else {
-      console.log('You must set a username and a password');
+      prompt('You must set a username and a password');
     }
   }
 }

@@ -22,6 +22,3 @@ passport.use(
       .catch(err => next(err));
   })
 );
-
-
-passport.use(new LocalStrategy(User.authenticate()));

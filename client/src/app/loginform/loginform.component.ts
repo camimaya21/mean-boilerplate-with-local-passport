@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 interface LoginForm {
   username: string;
@@ -17,7 +18,7 @@ export class LoginformComponent implements OnInit {
     password: ''
   };
 
-  constructor(public auth: AuthService) {}
+  constructor(public router: Router, private auth: AuthService, public route: ActivatedRoute) {}
 
   ngOnInit() {}
 
@@ -26,10 +27,13 @@ export class LoginformComponent implements OnInit {
     if (username !== '' && password !== '') {
       this.auth
         .login(username, password)
-        .map(user => console.log(user))
-        .subscribe();
+        .subscribe(
+          (user) => {
+            this.router.navigate(['/user']);
+          }
+        );
     } else {
-      console.log('You must set a username and a password');
+      prompt('You must set a username and a password');
     }
   }
 }
